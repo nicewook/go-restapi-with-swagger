@@ -1,0 +1,58 @@
+consumes:
+  - application/json
+info:
+  description: Go HTTP server with Swagger endpoints definition
+  title: RESTAPI-server-made-of-Golang
+  version: 0.1.0
+produces:
+  - application/json
+schemes:
+  - http
+swagger: "2.0"
+
+paths:
+  /health:
+    get:
+      operationID: checkHealth
+      produces:
+        - text/plain
+      responses:
+        200:
+          description: Health checked message
+          schema:
+            type: string
+            enum:
+              - OK
+  /hello/{user}:
+    get:
+      description: Returns a greeting to a user
+      parameters:
+        - name: user
+          in: path
+          type: string
+          required: true
+          description: Username to greet
+      responses:
+        200:
+          description: return greeting
+          schema:
+            type: string
+        400:
+          description: Something wrong
+
+  /gopher/{name}:
+    get:
+      description: gopher image
+      produces:
+        - image/png
+      parameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: What gopher image you want?
+      responses:
+        200:
+          description: return gopher image
+          schema:
+            type: file
